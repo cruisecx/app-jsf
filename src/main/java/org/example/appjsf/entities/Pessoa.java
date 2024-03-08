@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@org.hibernate.annotations.Proxy(lazy = false)
 @Table(name = "pessoas")
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nome;
@@ -20,14 +21,43 @@ public class Pessoa implements Serializable {
 
     private String sexo;
 
+    private String[] framweorks;
+
+    private Boolean ativo;
+
+    private String login;
+
+    private String senha;
+
+    private String perfilUser;
+
+
     public Pessoa() {
+
     }
 
-    public Pessoa(String nome, String sobrenome, Integer idade, String sexo) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.idade = idade;
-        this.sexo = sexo;
+    public void setFramweorks(String[] framweorks) {
+        this.framweorks = framweorks;
+    }
+
+    public String[] getFramweorks() {
+        return framweorks;
+    }
+
+    public String getPerfilUser() {
+        return perfilUser;
+    }
+
+    public void setPerfilUser(String perfilUser) {
+        this.perfilUser = perfilUser;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -36,10 +66,6 @@ public class Pessoa implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getSobrenome() {
@@ -64,5 +90,62 @@ public class Pessoa implements Serializable {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pessoa other = (Pessoa) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade + "]";
     }
 }

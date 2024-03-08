@@ -1,39 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+    <title>Login</title>
 </h:head>
 
 <h:body>
-    <h:outputLabel value="Nome"/>
-    <h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" />
+    <h:form id="formLogin" style="margin-top:10%; margin-left:40%;    margin-right: 40%;">
+        <h1>Faça o Login</h1>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Login:" />
+            <h:inputText value="#{pessoaBean.pessoa.login}" />
 
-    <br/>
+            <h:outputLabel value="Senha:" />
+            <h:inputText value="#{pessoaBean.pessoa.senha}" />
 
-    <h:outputLabel value="Idade"/>
-    <h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" required="true" />
-
-    <br/>
-
-    <h:outputLabel value="Sobrenome"/>
-    <h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" required="true" />
-
-    <br/>
-
-    <h:outputLabel value="Sexo"/>
-    <h:selectOneRadio value="#{pessoaBean.pessoa.sexo}" required="true">
-        <f:selectItems value="#{pessoaBean.optsEnumSexo}" var="optSexo">
-            <f:selectItem itemValue="#{optSexo.value}" itemLabel="#{optSexo.descricao}" />
-        </f:selectItems>
-    </h:selectOneRadio>
-
-    <br/>
-
-   <h:commandButton value="Salvar" action="#{pessoaBean.salvar()}" />
+            <h:commandButton value="Acessar" action="#{pessoaBean.logar}" />
+        </h:panelGrid>
+    </h:form>
 </h:body>
+
 </html>
