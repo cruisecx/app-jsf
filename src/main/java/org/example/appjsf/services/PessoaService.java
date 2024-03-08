@@ -5,6 +5,7 @@ import org.example.appjsf.entities.Pessoa;
 import org.example.appjsf.repositories.IDaoPessoa;
 import org.example.appjsf.repositories.IDaoPessoaImpl;
 
+import javax.faces.model.SelectItem;
 import java.util.List;
 
 public class PessoaService {
@@ -26,5 +27,9 @@ public class PessoaService {
 
     public Pessoa consultarUsuario(String login, String senha) {
         return daoPessoa.consultarUsuario(login, senha);
+    }
+
+    public List<SelectItem> getEstados() {
+        return daoPessoa.listaEstados();
     }
 }

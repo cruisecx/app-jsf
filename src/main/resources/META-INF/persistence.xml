@@ -3,6 +3,9 @@
     <persistence-unit name="meuprimeiroprojetojsf">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>org.example.appjsf.entities.Pessoa</class>
+        <class>org.example.appjsf.entities.Lancamento</class>
+        <class>org.example.appjsf.entities.Estados</class>
+        <class>org.example.appjsf.entities.Cidades</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jessica"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
