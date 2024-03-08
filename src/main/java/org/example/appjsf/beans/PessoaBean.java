@@ -1,23 +1,35 @@
 package org.example.appjsf.beans;
 
 import org.example.appjsf.entities.Pessoa;
+import org.example.appjsf.enuns.EnumSexo;
+import org.example.appjsf.services.PessoaService;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @ViewScoped
 @Named
 public class PessoaBean implements Serializable {
+    private static final Long serialVersionUID = 1L;
 
-    private Pessoa pessoa;
+    private Pessoa pessoa = new Pessoa();
 
-    private boolean show = false;
+    private List<Pessoa> pessoas = new ArrayList<>();
 
-    public void salvar() {
-        Pessoa pessoa1 = new Pessoa();
-        pessoa1.setNome("Só pra contrariar");
+    private PessoaService pessoaService = new PessoaService();
+
+    public String salvar() {
+        pessoaService.salvar(pessoa);
+        return "";
+    }
+
+    public String remover() {
+        pessoaService.delete(pessoa);
+        return "";
     }
 
     public Pessoa getPessoa() {
@@ -28,11 +40,8 @@ public class PessoaBean implements Serializable {
         this.pessoa = pessoa;
     }
 
-    public boolean isShow() {
-        return show;
+    public List<EnumSexo> getOptsEnumSexo() {
+        return Arrays.asList(EnumSexo.MASCULINO, EnumSexo.FEMININO);
     }
 
-    public void setShow(boolean show) {
-        this.show = show;
-    }
 }

@@ -10,8 +10,27 @@
 </h:head>
 
 <h:body>
-    <h:outputLabel value="Hello, world"/>
-    <h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" rendered="#{pessoaBean.show}" />
+    <h:outputLabel value="Nome"/>
+    <h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" />
+
+    <br/>
+
+    <h:outputLabel value="Idade"/>
+    <h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" required="true" />
+
+    <br/>
+
+    <h:outputLabel value="Sobrenome"/>
+    <h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" required="true" />
+
+    <br/>
+
+    <h:outputLabel value="Sexo"/>
+    <h:selectOneRadio value="#{pessoaBean.pessoa.sexo}" required="true">
+        <f:selectItems value="#{pessoaBean.optsEnumSexo}" var="optSexo">
+            <f:selectItem itemValue="#{optSexo.value}" itemLabel="#{optSexo.descricao}" />
+        </f:selectItems>
+    </h:selectOneRadio>
 
     <br/>
 
