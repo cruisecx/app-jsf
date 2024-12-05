@@ -32,16 +32,11 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty
-    @Size(min = 5, max = 50, message = "Nome deve ter entre 5 e 50 letras")
+
     private String nome;
 
-    @NotEmpty(message = "Sobrenome deve ser informado")
-    @NotNull(message = "Sobrenome deve ser informado")
     private String sobrenome;
 
-    @DecimalMax(value = "50", message = "Idade de ser menor que 50")
-    @DecimalMin(value = "10", message = "Idade deve ser maior que 10")
     private Integer idade;
 
     @Temporal(TemporalType.DATE)
@@ -76,12 +71,8 @@ public class Pessoa implements Serializable {
 
     private String extensao;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
     private byte[] fotoIconBase64Original;
 
-    @Column(name = "cep", nullable = false)
-    @NotBlank(message = "Cep não pode ser vazio")
     private String cep;
 
     private String logradouro;

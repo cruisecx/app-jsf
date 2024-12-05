@@ -1,22 +1,18 @@
 package org.example.appjsf.beans;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.Gson;
+import org.example.appjsf.dao.DaoGeneric;
+import org.example.appjsf.entities.Cidades;
+import org.example.appjsf.entities.Estados;
+import org.example.appjsf.entities.Pessoa;
+import org.example.appjsf.repositories.IDaoPessoa;
+import org.example.appjsf.repositories.IDaoPessoaImpl;
+import org.example.appjsf.services.CidadeService;
+import org.example.appjsf.services.MessageService;
+import org.example.appjsf.services.PessoaService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -29,18 +25,13 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
-
-import com.google.gson.Gson;
-
-import org.example.appjsf.dao.DaoGeneric;
-import org.example.appjsf.entities.Cidades;
-import org.example.appjsf.entities.Estados;
-import org.example.appjsf.entities.Pessoa;
-import org.example.appjsf.repositories.IDaoPessoa;
-import org.example.appjsf.repositories.IDaoPessoaImpl;
-import org.example.appjsf.services.CidadeService;
-import org.example.appjsf.services.MessageService;
-import org.example.appjsf.services.PessoaService;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 @ViewScoped
 @Named
@@ -79,7 +70,7 @@ public class PessoaBean implements Serializable {
         // bufered image para minatura
         BufferedImage resizedImage = new BufferedImage(largura, altura, type);
         Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(bufferedImage, 0,  0,  largura, altura, null);
+        g.drawImage(bufferedImage, 0, 0, largura, altura, null);
         g.dispose();
 
         // escrever novamente a imagem
@@ -171,7 +162,13 @@ public class PessoaBean implements Serializable {
 
     @PostConstruct
     public void carregarPessoas() {
-        pessoas = daoGeneric.getListEntity(Pessoa.class);
+        try {
+            pessoas = daoGeneric.getListEntity(Pessoa.class);
+        } catch (Exception e) {
+            System.out.println("==============================");
+            System.out.println(e.getMessage());
+            System.out.println("==============================");
+        }
     }
 
     public Pessoa getPessoa() {
@@ -278,7 +275,7 @@ public class PessoaBean implements Serializable {
             pessoa.setEstado(estado);
 
             @SuppressWarnings("unchecked")
-            List<Cidades> cidades =  CidadeService.getListaDeCidadesPeloEstadoId(estado.getId());
+            List<Cidades> cidades = CidadeService.getListaDeCidadesPeloEstadoId(estado.getId());
             List<SelectItem> selectItemsCidades = CidadeService.retornaSelectItemDeCidades(cidades);
             setCidades(selectItemsCidades);
         }
@@ -289,7 +286,7 @@ public class PessoaBean implements Serializable {
         int size = 1024;
         byte[] buf = null;
 
-        if(is instanceof ByteArrayInputStream) {
+        if (is instanceof ByteArrayInputStream) {
             size = is.available();
             buf = new byte[size];
             len = is.read(buf, 0, size);
@@ -297,7 +294,7 @@ public class PessoaBean implements Serializable {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             buf = new byte[size];
 
-            while((len = is.read(buf, 0, size)) != -1) {
+            while ((len = is.read(buf, 0, size)) != -1) {
                 bos.write(buf, 0, size);
             }
 
