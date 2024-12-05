@@ -6,6 +6,7 @@
         <class>org.example.appjsf.entities.Lancamento</class>
         <class>org.example.appjsf.entities.Estados</class>
         <class>org.example.appjsf.entities.Cidades</class>
+        <class>org.example.appjsf.entities.Aluno</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jsf_banco"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>

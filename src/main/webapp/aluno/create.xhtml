@@ -22,47 +22,47 @@
 
     <h1>Lançamentos</h1>
 
-    <h:form id="formLancamento"
+    <h:form id="formAluno"
             style="margin-top:10%; margin-left:40%;    margin-right: 40%;">
         <h:panelGrid columns="2">
             <f:facet name="header">
-                <h:outputText value="Cadastro de lançamentos" />
+                <h:outputText value="Cadastro de alunos" />
             </f:facet>
 
             <h:outputLabel value="ID:" />
-            <h:inputText value="#{lancamentoBean.lancamento.id}" readonly="true" />
+            <h:inputText value="#{alunoBean.aluno.id}" readonly="true" />
 
-            <h:outputLabel value="Nota:" />
-            <h:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
+            <h:outputLabel value="Nome:" />
+            <h:inputText value="#{alunoBean.aluno.nome}" />
 
-            <h:outputLabel value="Emp. Origem:" />
-            <h:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
+            <h:outputLabel value="Email" />
+            <h:inputText value="#{alunoBean.aluno.email}" />
 
-            <h:outputLabel value="Emp. Destino:" />
-            <h:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
+            <h:outputLabel value="Idade" />
+            <h:inputText value="#{alunoBean.aluno.idade}" />
 
             <h:column>
                 <h:outputLabel />
                 <h:panelGroup>
-                    <h:commandButton value="Novo" action="#{lancementoBean.novo}"
+                    <h:commandButton value="Novo" action="#{alunoBean.novo}"
                                      title="Novo" />
                     <h:commandButton style="margin-left:1cm;" value="Salvar"
-                                     action="#{lancamentoBean.salvar}"
+                                     action="#{alunoBean.salvar}"
                                      title="Salvar" />
                     <h:commandButton style="margin-left:1cm;" value="Remover"
-                                     action="#{lancamentoBean.remover}"
+                                     action="#{alunoBean.remover}"
                                      title="Remover"
                                      rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
                     <h:commandButton style="margin-left:1cm;" value="Limpar"
-                                     action="#{lancementoBean.novo}"
+                                     action="#{alunoBean.novo}"
                                      title="Limpar" />
                 </h:panelGroup>
             </h:column>
 
         </h:panelGrid>
 
-        <h:dataTable value="#{lancamentoBean.lancamentos}" var="l" border="3">
-            <f:facet name="header">Lista de lançamentos</f:facet>
+        <h:dataTable value="#{alunoBean.alunos}" var="l" border="3">
+            <f:facet name="header">Lista de alunos</f:facet>
 
             <h:column>
                 <f:facet name="header">#ID</f:facet>
@@ -71,32 +71,32 @@
 
             <h:column>
                 <f:facet name="header">Nº Nota Fiscal</f:facet>
-                <h:outputLabel value="#{l.numeroNotaFiscal}" />
+                <h:outputLabel value="#{l.idade}" />
             </h:column>
 
             <h:column>
                 <f:facet name="header">Empresa Origem</f:facet>
-                <h:outputLabel value="#{l.empresaOrigem}" />
+                <h:outputLabel value="#{l.nome}" />
             </h:column>
 
             <h:column>
                 <f:facet name="header">Empresa Destino</f:facet>
-                <h:outputLabel value="#{l.empresaDestino}" />
+                <h:outputLabel value="#{l.email}" />
             </h:column>
 
             <h:column>
                 <f:facet name="header">Editar</f:facet>
                 <h:commandLink title="Editar">
                     <h:graphicImage value="/resources/imagens/editar.jpg" width="30px" height="30px" />
-                    <f:setPropertyActionListener value="#{l}" target="#{lancamentoBean.lancamento}" />
+                    <f:setPropertyActionListener value="#{l}" target="#{alunoBean.aluno}" />
                 </h:commandLink>
             </h:column>
 
             <h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
                 <f:facet name="header">Remover</f:facet>
-                <h:commandLink title="Remover" action="#{lancamentoBean.remover}">
+                <h:commandLink title="Remover" action="#{alunoBean.remover()}">
                     <h:graphicImage value="/resources/imagens/deletar.png" width="30px" height="30px" />
-                    <f:setPropertyActionListener value="#{l}" target="#{lancamentoBean.lancamento}" />
+                    <f:setPropertyActionListener value="#{l}" target="#{alunoBean.aluno}" />
                 </h:commandLink>
             </h:column>
 
