@@ -24,6 +24,13 @@
 
     <h:form id="formAluno"
             style="margin-top:10%; margin-left:40%;    margin-right: 40%;">
+
+        <p:messages />
+
+        <h:message for="nome"/>
+        <h:message for="email"/>
+        <h:message for="telefoneCelular"/>
+
         <h:panelGrid columns="2">
             <f:facet name="header">
                 <h:outputText value="Cadastro de alunos" />
@@ -33,27 +40,37 @@
             <h:inputText value="#{alunoBean.aluno.id}" readonly="true" />
 
             <h:outputLabel value="Nome:" />
-            <h:inputText value="#{alunoBean.aluno.nome}" />
+            <h:inputText id="nome" value="#{alunoBean.aluno.nome}" required="true" requiredMessage="Preenchimento obrigatório!" />
 
-            <h:outputLabel value="Email" />
-            <h:inputText value="#{alunoBean.aluno.email}" />
+            <h:outputLabel value="Email:" />
+            <h:inputText  id="email" value="#{alunoBean.aluno.email}" >
+                <f:validateRegex pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+            </h:inputText>
 
-            <h:outputLabel value="Idade" />
-            <h:inputText value="#{alunoBean.aluno.idade}" />
+            <h:outputLabel value="Idade:" />
+            <h:inputText id="idade" value="#{alunoBean.aluno.idade}" >
+                <f:validateLength minimum="2" maximum="3" />
+            </h:inputText>
+
+            <h:outputLabel value="Telefone Celular:" />
+            <h:inputText id="telefoneCelular" value="#{alunoBean.aluno.telefoneCelular}" >
+                <f:validateRegex pattern="[0-9]{11}"/>
+            </h:inputText>
 
             <h:column>
                 <h:outputLabel />
                 <h:panelGroup>
                     <h:commandButton value="Novo" action="#{alunoBean.novo}"
                                      title="Novo" />
-                    <h:commandButton style="margin-left:1cm;" value="Salvar"
+                    <h:commandButton value="Salvar"
                                      action="#{alunoBean.salvar}"
                                      title="Salvar" />
-                    <h:commandButton style="margin-left:1cm;" value="Remover"
+                    <h:commandButton value="Remover"
+                                     type="button"
                                      action="#{alunoBean.remover}"
                                      title="Remover"
                                      rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
-                    <h:commandButton style="margin-left:1cm;" value="Limpar"
+                    <h:commandButton value="Limpar"
                                      action="#{alunoBean.novo}"
                                      title="Limpar" />
                 </h:panelGroup>
@@ -70,18 +87,23 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Nº Nota Fiscal</f:facet>
+                <f:facet name="header">Idade</f:facet>
                 <h:outputLabel value="#{l.idade}" />
             </h:column>
 
             <h:column>
-                <f:facet name="header">Empresa Origem</f:facet>
+                <f:facet name="header">Nome</f:facet>
                 <h:outputLabel value="#{l.nome}" />
             </h:column>
 
             <h:column>
-                <f:facet name="header">Empresa Destino</f:facet>
+                <f:facet name="header">E-mail</f:facet>
                 <h:outputLabel value="#{l.email}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Telefone Celular</f:facet>
+                <h:outputLabel value="#{l.telefoneCelular}" />
             </h:column>
 
             <h:column>

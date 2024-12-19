@@ -15,6 +15,7 @@ public class Aluno implements Serializable {
 
     private String nome;
     private String email;
+    private String telefoneCelular;
 
     private int idade;
 
@@ -49,4 +50,8 @@ public class Aluno implements Serializable {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+    public String getTelefoneCelular() { return telefoneCelular; }
+
+    public void setTelefoneCelular(String telefoneCelular){ this.telefoneCelular = telefoneCelular;}
 }

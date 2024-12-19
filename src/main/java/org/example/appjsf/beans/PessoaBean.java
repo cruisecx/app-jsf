@@ -146,6 +146,24 @@ public class PessoaBean implements Serializable {
 
     }
 
+    public String UsuarioLogadoString(){
+        // Obtém a instância atual do FacesContext
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        // Obtém o ExternalContext para acessar a sessão
+        ExternalContext externalContext = context.getExternalContext();
+
+        // Recupera o objeto da sessão com a chave "usuarioLogado"
+        Object usuarioLogado = externalContext.getSessionMap().get("usuarioLogado");
+
+        if(usuarioLogado != null && usuarioLogado instanceof Pessoa){
+            Pessoa pessoa = (Pessoa) usuarioLogado;
+            return pessoa.getNome();
+        }
+
+        return null;
+    }
+
     public String novo() {
         pessoa = new Pessoa();
         return "";
@@ -301,5 +319,12 @@ public class PessoaBean implements Serializable {
         }
 
         return buf;
+    }
+
+    @Override
+    public String toString() {
+        return "PessoaBean{" +
+                "pessoa=" + pessoa +
+                '}';
     }
 }
